@@ -40,5 +40,31 @@ public class Food {
         return discount;
     }
 
+    /**
+     *
+     * @return
+     */
+    public double shelfLife (Food food) {
+        return ((food.getExpireDate().getTime() - food.getCreateDate().getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    /**
+     *
+     * @param currentDate
+     * @return
+     */
+
+    public double remainingShelfLife (Date currentDate, Food food) {
+        double usedShelfLife;
+        double shelfLife = shelfLife(food);
+        double remainingShelfLifePeriod =  ((food.getExpireDate().getTime() - currentDate.getTime())/ (1000 * 60 * 60 * 24));
+        if (remainingShelfLifePeriod < 0) {
+            usedShelfLife = 1;
+        } else {
+            usedShelfLife = (1 - remainingShelfLifePeriod / shelfLife);
+        }
+        return usedShelfLife;
+    }
+
 
 }
