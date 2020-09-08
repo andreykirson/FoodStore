@@ -16,7 +16,7 @@ public class Shop implements Store {
     public boolean accept(Food food) {
         Date currentDate = new Date();
         double remainingShelfLife = food.remainingShelfLife(currentDate, food);
-        return (remainingShelfLife > 0.25 && remainingShelfLife < 0.75);
+        return (remainingShelfLife > 0.25 && remainingShelfLife <= 0.75);
     }
 
     /**
