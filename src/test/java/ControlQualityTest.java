@@ -15,6 +15,8 @@ public class ControlQualityTest {
         Food banana = new Food("banana", new SimpleDateFormat("yyyy-MM-dd").parse("2021-09-30"),
                 new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-01"), 100, 0.3);
         ControlQuality controlQuality = new ControlQuality();
+        List<Food> foods = new ArrayList<>();
+        foods.add(banana);
         Warehouse warehouse = new Warehouse();
         Shop shop = new Shop();
         Trash trash = new Trash();
@@ -22,7 +24,7 @@ public class ControlQualityTest {
         stores.add(warehouse);
         stores.add(shop);
         stores.add(trash);
-        controlQuality.controlAlgorithm(banana, stores);
+        controlQuality.sort(foods, stores);
         assertThat(stores.get(0).size(), is(1));
     }
 
@@ -31,7 +33,8 @@ public class ControlQualityTest {
 
         Food banana = new Food("banana", new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-20"),
                 new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-01"), 100, 0.3);
-
+        List<Food> foods = new ArrayList<>();
+        foods.add(banana);
         ControlQuality controlQuality = new ControlQuality();
         Warehouse warehouse = new Warehouse();
         Shop shop = new Shop();
@@ -40,7 +43,7 @@ public class ControlQualityTest {
         stores.add(warehouse);
         stores.add(shop);
         stores.add(trash);
-        controlQuality.controlAlgorithm(banana, stores);
+        controlQuality.sort(foods, stores);
         assertThat(stores.get(1).size(), is(1));
     }
 
@@ -48,6 +51,8 @@ public class ControlQualityTest {
     public void whenAddToShop() throws ParseException {
         Food banana = new Food("banana", new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-08"),
                 new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-06"), 100, 0.3);
+        List<Food> foods = new ArrayList<>();
+        foods.add(banana);
         ControlQuality controlQuality = new ControlQuality();
         Warehouse warehouse = new Warehouse();
         Shop shop = new Shop();
@@ -56,7 +61,32 @@ public class ControlQualityTest {
         stores.add(warehouse);
         stores.add(shop);
         stores.add(trash);
-        controlQuality.controlAlgorithm(banana, stores);
+        controlQuality.sort(foods, stores);
         assertThat(stores.get(2).size(), is(1));
     }
+
+    @Test
+    public void whenResort() throws ParseException {
+        Food banana = new Food("banana", new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-08"),
+                new SimpleDateFormat("yyyy-MM-dd").parse("2020-09-06"), 100, 0.3);
+        List<Food> foods = new ArrayList<>();
+        foods.add(banana);
+        ControlQuality controlQuality = new ControlQuality();
+        Warehouse warehouse = new Warehouse();
+        Shop shop = new Shop();
+        Trash trash = new Trash();
+        List<Store> stores = new ArrayList<>();
+        stores.add(warehouse);
+        stores.add(shop);
+        stores.add(trash);
+        controlQuality.sort(foods, stores);
+        controlQuality.resort(stores);
+        assertThat(stores.get(2).size(), is(1));
+    }
+
+
+
+
+
+
 }

@@ -1,9 +1,8 @@
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Stack;
 
 public class Trash implements Store{
-   private List<Food> bucket = new ArrayList<>();
+   private Stack<Food> bucket = new Stack<>();
 
     /**
      * @param food
@@ -33,5 +32,10 @@ public class Trash implements Store{
     @Override
     public int size () {
         return bucket.size();
+    }
+
+    @Override
+    public Food get() {
+        return bucket.pop();
     }
 }

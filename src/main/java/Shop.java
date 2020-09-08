@@ -1,10 +1,9 @@
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.Stack;
 
 public class Shop implements Store {
 
-    private List<Food> store = new ArrayList<>();
+    private Stack<Food> store = new Stack<>();
 
     /**
      *
@@ -28,7 +27,7 @@ public class Shop implements Store {
         if (accept(food)) {
             double newPrice = food.getPrice() * food.getDiscount();
             food.setPrice(newPrice);
-            store.add(food);
+            store.push(food);
         }
     }
 
@@ -39,6 +38,11 @@ public class Shop implements Store {
     @Override
     public int size () {
         return store.size();
+    }
+
+    @Override
+    public Food get() {
+        return store.pop();
     }
 
 }
